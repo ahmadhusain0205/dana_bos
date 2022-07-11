@@ -320,6 +320,39 @@
           }
 
           initailizeSelect2_prog();
+          initailizeSelect2_pen();
+
+          function initailizeSelect2_subprog(str) {
+               $('.select2_subprog').select2({
+                    allowClear: true,
+                    multiple: false,
+                    placeholder: '--- Pilih Sub Program ---',
+                    dropdownAutoWidth: true,
+                    language: {
+                         inputTooShort: function() {
+                              return 'Ketikan minimal 2 huruf';
+                         }
+                    },
+                    ajax: {
+                         url: "<?php echo base_url(); ?>Globali/datasubprogram/" + str,
+                         type: "post",
+                         dataType: 'json',
+                         delay: 250,
+                         data: function(params) {
+                              return {
+                                   searchTerm: params.term
+                              };
+                         },
+
+                         processResults: function(response) {
+                              return {
+                                   results: response
+                              };
+                         },
+                         cache: true
+                    }
+               });
+          }
 
           function initailizeSelect2_prog() {
                $('.select2_prog').select2({
@@ -334,6 +367,38 @@
                     },
                     ajax: {
                          url: "<?php echo base_url(); ?>Globali/dataprogram",
+                         type: "post",
+                         dataType: 'json',
+                         delay: 250,
+                         data: function(params) {
+                              return {
+                                   searchTerm: params.term
+                              };
+                         },
+
+                         processResults: function(response) {
+                              return {
+                                   results: response
+                              };
+                         },
+                         cache: true
+                    }
+               });
+          }
+
+          function initailizeSelect2_pen() {
+               $('.select2_pen').select2({
+                    allowClear: true,
+                    multiple: false,
+                    placeholder: '--- Pilih Pendidikan ---',
+                    dropdownAutoWidth: true,
+                    language: {
+                         inputTooShort: function() {
+                              return 'Ketikan minimal 2 huruf';
+                         }
+                    },
+                    ajax: {
+                         url: "<?php echo base_url(); ?>Globali/datapendidikan",
                          type: "post",
                          dataType: 'json',
                          delay: 250,

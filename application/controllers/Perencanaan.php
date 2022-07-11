@@ -25,4 +25,10 @@ class Perencanaan extends CI_Controller
           ];
           $this->template->load('Template/Content', 'Perencanaan/Tambah', $data);
      }
+     public function subprogram()
+     {
+          $kodeprog = $this->input->get('kodeprog');
+          $data = $this->db->get_where('subprogram', ['kodeprog' => $kodeprog])->result();
+          echo json_encode($data);
+     }
 }
