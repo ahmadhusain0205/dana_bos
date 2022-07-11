@@ -107,6 +107,21 @@
                               </div>
                          </li>
                     <?php endif; ?>
+                    <?php if ($this->uri->segment(1) == 'pendidikan') : ?>
+                         <li class="nav-item active">
+                              <a class="nav-link" href="<?= site_url('Pendidikan'); ?>">
+                                   <i class="fas fa-fw fa-graduation-cap"></i>
+                                   <span>Pendidikan</span>
+                              </a>
+                         </li>
+                    <?php else : ?>
+                         <li class="nav-item">
+                              <a class="nav-link" href="<?= site_url('Pendidikan'); ?>">
+                                   <i class="fas fa-fw fa-graduation-cap"></i>
+                                   <span>Pendidikan</span>
+                              </a>
+                         </li>
+                    <?php endif; ?>
                     <hr class="sidebar-divider my-0">
                     <?php if ($this->uri->segment(1) == 'Beranda') : ?>
                          <li class="nav-item active">
