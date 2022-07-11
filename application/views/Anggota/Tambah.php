@@ -6,7 +6,7 @@
                          <div>
                               <h3 class="text-primary">
                                    <?= strtoupper($judul); ?>
-                                   <a type="button" href="#" class="btn btn-danger float-right my-auto" onclick="back_page_before()">
+                                   <a type="button" href="#" class="btn btn-danger btn-sm float-right my-auto" onclick="back_page_before()">
                                         <i class="fas fa-chevron-circle-left"></i> Kembali
                                    </a>
                               </h3>
@@ -113,7 +113,7 @@
                               </div>
                               <div class="row justify-content-center">
                                    <div class="col">
-                                        <button type="button" onclick="save()" class="btn btn-success float-right"><i class="fas fa-save"></i> Simpan</button>
+                                        <button type="button" onclick="save()" class="btn btn-success btn-sm float-right"><i class="fas fa-save"></i> Simpan</button>
                                    </div>
                               </div>
                          </form>

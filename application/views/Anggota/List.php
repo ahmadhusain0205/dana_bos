@@ -6,7 +6,7 @@
                          <div>
                               <h3 class="text-primary">
                                    <?= strtoupper($judul); ?>
-                                   <a type="button" href="#" class="btn btn-primary float-right my-auto" onclick="tambah_a()">
+                                   <a type="button" href="#" class="btn btn-primary float-right btn-sm my-auto" onclick="tambah_a()">
                                         <i class="fas fa-plus-circle"></i> Tambah Data
                                    </a>
                               </h3>
