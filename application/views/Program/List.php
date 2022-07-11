@@ -6,7 +6,7 @@
                          <button class="btn btn-primary btn-sm float-right" type="button" onclick="tambah_data()">
                               <i class="fas fa-plus-circle"></i> Tambah
                          </button>
-                         <a type="button" href="#" class="btn btn-secondary btn-sm float-right my-auto mr-2" onclick="unggah_perencanaan()">
+                         <a type="button" href="#" class="btn btn-secondary btn-sm float-right my-auto mr-2" onclick="unggah_program()">
                               <i class="fas fa-upload"></i> Unggah
                          </a>
                     </div>
@@ -30,7 +30,7 @@
                                              <td><?= $p->namaprog; ?></td>
                                              <td class="text-center">
                                                   <button class="btn btn-sm btn-circle btn-warning" type="button" onclick="ubah(<?= $p->id; ?>)"><i class="fa fa-edit"></i></button>
-                                                  <?php $sql = $this->db->query('select * from program where kodeprog in (select kodeprog from subprogram)')->result();
+                                                  <?php $sql = $this->db->query('select * from subprogram where kodeprog = "' . $p->kodeprog . '"')->result();
                                                   if ($sql) :
                                                   ?>
                                                        <button class="btn btn-sm btn-circle btn-danger" type="button" disabled><i class="fa fa-trash"></i></button>
@@ -139,7 +139,7 @@
 </div>
 
 <script>
-     function unggah_perencanaan() {
+     function unggah_program() {
           $('#unggah').modal('show');
      }
      $(document).ready(function() {
