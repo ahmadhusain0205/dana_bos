@@ -64,4 +64,34 @@ class Pendidikan extends CI_Controller
           $data = $this->db->get_where('pendidikan', ['id' => $id])->row_array();
           echo json_encode($data);
      }
+     public function upload()
+     {
+          $config['upload_path'] = realpath('excel');
+          $config['allowed_types'] = 'xlsx|xls|csv';
+          $config['max_size'] = '10000';
+          $config['encrypt_name'] = true;
+          $this->load->library('upload', $config);
+          if (!$this->upload->do_upload()) {
+               redirect('Pendidikan');
+          } else {
+               $data_upload = $this->upload->data();
+               $excelreader = new PHPExcel_Reader_Excel2007();
+               $loadexcel = $excelreader->load('excel/' . $data_upload['file_name']);
+               $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
+               $data = array();
+               $numrow = 1;
+               foreach ($sheet as $row) {
+                    if ($numrow > 1) {
+                         array_push($data, array(
+                              'kodepen' => $row['A'],
+                              'namapen' => $row['B'],
+                         ));
+                    }
+                    $numrow++;
+               }
+               $this->db->insert_batch('pendidikan', $data);
+               unlink(realpath('excel/' . $data_upload['file_name']));
+               redirect('Pendidikan');
+          }
+     }
 }
