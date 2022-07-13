@@ -78,6 +78,35 @@
                               </a>
                          </li>
                     <?php endif; ?>
+                    <?php if ($this->uri->segment(1) == 'Kegiatan' || $this->uri->segment(1) == 'Subkegiatan') : ?>
+                         <li class="nav-item active">
+                              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                   <i class="fas fa-fw fa-people-carry"></i>
+                                   <span>Master Kegiatan</span>
+                              </a>
+                              <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                   <div class="bg-white py-2 collapse-inner rounded">
+                                        <h6 class="collapse-header">Daftar:</h6>
+                                        <a class="collapse-item" href="<?= site_url('Kegiatan'); ?>">Kegiatan</a>
+                                        <a class="collapse-item" href="<?= site_url('Subkegiatan'); ?>">Subkegiatan</a>
+                                   </div>
+                              </div>
+                         </li>
+                    <?php else : ?>
+                         <li class="nav-item">
+                              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                   <i class="fas fa-fw fa-people-carry"></i>
+                                   <span>Master Kegiatan</span>
+                              </a>
+                              <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                   <div class="bg-white py-2 collapse-inner rounded">
+                                        <h6 class="collapse-header">Daftar:</h6>
+                                        <a class="collapse-item" href="<?= site_url('Kegiatan'); ?>">Kegiatan</a>
+                                        <a class="collapse-item" href="<?= site_url('Subkegiatan'); ?>">Subkegiatan</a>
+                                   </div>
+                              </div>
+                         </li>
+                    <?php endif; ?>
                     <?php if ($this->uri->segment(1) == 'Program' || $this->uri->segment(1) == 'Subprogram') : ?>
                          <li class="nav-item active">
                               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
