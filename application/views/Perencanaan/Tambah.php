@@ -18,6 +18,18 @@
                                         </div>
                                    </div>
                                    <div class="form-group row">
+                                        <label for="kegiatan" class="col-sm-2 col-form-label">Kegiatan</label>
+                                        <div class="col-sm-5">
+                                             <select name="kegiatan" id="kegiatan" class="form-control select2_keg" onchange="showsubkeg()"></select>
+                                        </div>
+                                   </div>
+                                   <div class="form-group row">
+                                        <label for="subkegiatan" class="col-sm-2 col-form-label">Sub Kegiatan</label>
+                                        <div class="col-sm-5">
+                                             <select name="subkegiatan" id="subkegiatan" class="form-control select2_subkeg"></select>
+                                        </div>
+                                   </div>
+                                   <div class="form-group row">
                                         <label for="program" class="col-sm-2 col-form-label">Program</label>
                                         <div class="col-sm-5">
                                              <select name="program" id="program" class="form-control select2_prog" onchange="showsubprog()"></select>
@@ -125,6 +137,7 @@
 <script>
      $(window).on("load", function() {
           $('.select2_subprog').attr('disabled', true);
+          $('.select2_subkeg').attr('disabled', true);
           $('.select2_triwulan').select2();
           initailizeSelect2_subprog(null);
      });
@@ -133,6 +146,12 @@
           var prog = $("#program").val();
           initailizeSelect2_subprog(prog);
           $('.select2_subprog').attr('disabled', false);
+     }
+
+     function showsubkeg() {
+          var keg = $("#kegiatan").val();
+          initailizeSelect2_subkeg(keg);
+          $('.select2_subkeg').attr('disabled', false);
      }
 </script>
 

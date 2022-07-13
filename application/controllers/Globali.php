@@ -30,6 +30,16 @@ class Globali extends CI_Controller
           $data = $this->db->query("SELECT kodeprog AS id, CONCAT(' [ ',kodeprog,' ] ','-',' [ ',namaprog,' ] ') AS text FROM program WHERE id LIKE '%" . $key . "%' OR kodeprog LIKE '%" . $key . "%' OR namaprog LIKE '%" . $key . "%' ORDER BY kodeprog ASC $limm")->result();
           echo json_encode($data);
      }
+     public function datasubkegiatan($str)
+     {
+          $key = $this->input->post('searchTerm');
+          if ($str != '' || $str != 'null') {
+               $data = $this->db->query("SELECT a.kodekeg AS id, CONCAT(' [ ',a.kodekeg,' ] ','-',' [ ',b.namakeg,' ] ','-',' [ ',a.namasubkeg,' ] ') AS text FROM subkegiatan a join kegiatan b on a.kodekeg=b.kodekeg WHERE a.kodekeg = '$str' and (a.kodekeg LIKE '%" . $key . "%' OR b.namakeg LIKE '%" . $key . "%' OR a.namasubkeg LIKE '%" . $key . "%') ORDER BY namakeg ASC")->result();
+          } else {
+               $data = $this->db->query("SELECT a.kodekeg AS id, CONCAT('-- PILIH KEGIATAN TERLEBIH DAHULU --') AS text FROM subkegiatan a join kegiatan b on a.kodekeg=b.kodekeg WHERE a.kodekeg = '' and (a.kodekeg LIKE '%" . $key . "%' OR b.namakeg LIKE '%" . $key . "%' OR a.namasubkeg LIKE '%" . $key . "%') ORDER BY namakeg ASC Limit 1")->result();
+          }
+          echo json_encode($data);
+     }
      public function datasubprogram($str)
      {
           $key = $this->input->post('searchTerm');

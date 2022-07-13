@@ -91,7 +91,7 @@ class Subkegiatan extends CI_Controller
                }
                $this->db->insert_batch('subkegiatan', $data);
                unlink(realpath('excel/' . $data_upload['file_name']));
-               redirect('subkegiatan');
+               redirect('Subkegiatan');
           }
      }
 }

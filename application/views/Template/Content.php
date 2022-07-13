@@ -384,6 +384,38 @@
                });
           }
 
+          function initailizeSelect2_subkeg(str) {
+               $('.select2_subkeg').select2({
+                    allowClear: true,
+                    multiple: false,
+                    placeholder: '--- Pilih Sub Kegiatan ---',
+                    dropdownAutoWidth: true,
+                    language: {
+                         inputTooShort: function() {
+                              return 'Ketikan minimal 2 huruf';
+                         }
+                    },
+                    ajax: {
+                         url: "<?php echo base_url(); ?>Globali/datasubkegiatan/" + str,
+                         type: "post",
+                         dataType: 'json',
+                         delay: 250,
+                         data: function(params) {
+                              return {
+                                   searchTerm: params.term
+                              };
+                         },
+
+                         processResults: function(response) {
+                              return {
+                                   results: response
+                              };
+                         },
+                         cache: true
+                    }
+               });
+          }
+
           function initailizeSelect2_subprog(str) {
                $('.select2_subprog').select2({
                     allowClear: true,
