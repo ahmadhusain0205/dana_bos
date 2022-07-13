@@ -94,4 +94,8 @@ class Program extends CI_Controller
                redirect('Program');
           }
      }
+     public function template()
+     {
+          $this->load->view('Program/Template');
+     }
 }

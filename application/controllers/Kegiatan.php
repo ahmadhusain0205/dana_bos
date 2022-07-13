@@ -94,4 +94,8 @@ class Kegiatan extends CI_Controller
                redirect('Kegiatan');
           }
      }
+     public function template()
+     {
+          $this->load->view('Kegiatan/Template');
+     }
 }

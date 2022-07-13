@@ -94,4 +94,8 @@ class Subkegiatan extends CI_Controller
                redirect('Subkegiatan');
           }
      }
+     public function template()
+     {
+          $this->load->view('Subkegiatan/Template');
+     }
 }

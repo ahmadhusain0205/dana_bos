@@ -94,4 +94,8 @@ class Pendidikan extends CI_Controller
                redirect('Pendidikan');
           }
      }
+     public function template()
+     {
+          $this->load->view('Subprogram/Template');
+     }
 }

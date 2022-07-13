@@ -94,4 +94,8 @@ class Subprogram extends CI_Controller
                redirect('Subprogram');
           }
      }
+     public function template()
+     {
+          $this->load->view('Subprogram/Template');
+     }
 }

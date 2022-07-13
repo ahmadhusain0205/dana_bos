@@ -9,6 +9,9 @@
                          <a type="button" href="#" class="btn btn-secondary btn-sm float-right my-auto mr-2" onclick="unggah_program()">
                               <i class="fas fa-upload"></i> Unggah
                          </a>
+                         <a type="button" href="<?= site_url('Program/template') ?>" class="btn btn-info btn-sm float-right my-auto mr-2">
+                              <i class="fas fa-download"></i> Template Excel
+                         </a>
                     </div>
                     <hr>
                     <div class="table-responsive">
