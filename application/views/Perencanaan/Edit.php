@@ -138,6 +138,16 @@
                                              </tbody>
                                         </table>
                                    </div>
+                                   <div class="row">
+                                        <div class="col">
+                                             <button type="button" onclick="tambah()" class="btn btn-primary btn-sm btn-circle" style="margin-left: 10px;">
+                                                  <i class="fa fa-plus"></i>
+                                             </button>
+                                             <button type="button" onclick="hapus()" class="btn btn-danger btn-sm btn-circle" style="margin-left: 10px;">
+                                                  <i class="fa fa-trash"></i>
+                                             </button>
+                                        </div>
+                                   </div>
                               </div>
                          </div>
                          <div class="row">
@@ -207,6 +217,37 @@
      }
      var arr = [1];
      var idrow = <?= $jumdetail + 1; ?>;
+</script>
+
+<script>
+     function tambah() {
+          var x = document.getElementById('datatable').insertRow(idrow);
+          var td1 = x.insertCell(0);
+          var td2 = x.insertCell(1);
+          var td3 = x.insertCell(2);
+          var td4 = x.insertCell(3);
+          var td5 = x.insertCell(4);
+          var barang = "<td><input name='namabarang[]' id='namabarang" + idrow + "' class='form-control'></td>";
+          var satuan = "<td><input name='satuan[]' id='satuan" + idrow + "' class='form-control'></td>";
+          var qty = "<td><input name='qty[]' id=qty" + idrow + " onchange='totalline(" + idrow + "); qtyc(" + idrow + ")' value=1  type='text' class='form-control rightJustified'></td>";
+          var harga = "<td><input name='harga[]'  id=harga" + idrow + " onchange='totalline(" + idrow + ");cekharga(" + idrow + ");' value='0'  type='text' class='form-control rightJustified'> </td>";
+          var jum = "<td><input name='jumlah[]' id=jumlah" + idrow + " type='text' class='form-control rightJustified' size='40%' readonly value='0'></td>";
+          td1.innerHTML = barang;
+          td2.innerHTML = satuan;
+          td3.innerHTML = qty;
+          td4.innerHTML = harga;
+          td5.innerHTML = jum;
+          total();
+          idrow++;
+     }
+
+     function hapus() {
+          if (idrow > 2) {
+               var x = document.getElementById('datatable').deleteRow(idrow - 1);
+               idrow--;
+               total();
+          }
+     }
 </script>
 
 <!-- aritmatika rp -->
