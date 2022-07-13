@@ -1,6 +1,20 @@
 <?php
 class M_invoice extends CI_Model
 {
+     public function kodekeg()
+     {
+          $sql = "SELECT kodekeg AS kodekeg FROM kegiatan ORDER BY kodekeg DESC LIMIT 1";
+          $query = $this->db->query($sql);
+          if ($query->num_rows() > 0) {
+               $row = $query->row();
+               $n = (substr($row->kodekeg, 1)) + 1;
+               $no = sprintf("%'.06d", $n);
+          } else {
+               $no = "000001";
+          }
+          $invoice = "K" . $no;
+          return $invoice;
+     }
      public function kodeprog()
      {
           $sql = "SELECT kodeprog AS kodeprog FROM program ORDER BY kodeprog DESC LIMIT 1";
