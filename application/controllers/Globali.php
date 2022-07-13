@@ -34,7 +34,7 @@ class Globali extends CI_Controller
      {
           $key = $this->input->post('searchTerm');
           if ($str != '' || $str != 'null') {
-               $data = $this->db->query("SELECT a.kodekeg AS id, CONCAT(' [ ',a.kodekeg,' ] ','-',' [ ',b.namakeg,' ] ','-',' [ ',a.namasubkeg,' ] ') AS text FROM subkegiatan a join kegiatan b on a.kodekeg=b.kodekeg WHERE a.kodekeg = '$str' and (a.kodekeg LIKE '%" . $key . "%' OR b.namakeg LIKE '%" . $key . "%' OR a.namasubkeg LIKE '%" . $key . "%') ORDER BY namakeg ASC")->result();
+               $data = $this->db->query("SELECT a.id AS id, CONCAT(' [ ',a.kodekeg,' ] ','-',' [ ',b.namakeg,' ] ','-',' [ ',a.namasubkeg,' ] ') AS text FROM subkegiatan a join kegiatan b on a.kodekeg=b.kodekeg WHERE a.kodekeg = '$str' and (a.kodekeg LIKE '%" . $key . "%' OR b.namakeg LIKE '%" . $key . "%' OR a.namasubkeg LIKE '%" . $key . "%') ORDER BY namakeg ASC")->result();
           } else {
                $data = $this->db->query("SELECT a.kodekeg AS id, CONCAT('-- PILIH KEGIATAN TERLEBIH DAHULU --') AS text FROM subkegiatan a join kegiatan b on a.kodekeg=b.kodekeg WHERE a.kodekeg = '' and (a.kodekeg LIKE '%" . $key . "%' OR b.namakeg LIKE '%" . $key . "%' OR a.namasubkeg LIKE '%" . $key . "%') ORDER BY namakeg ASC Limit 1")->result();
           }
@@ -44,7 +44,7 @@ class Globali extends CI_Controller
      {
           $key = $this->input->post('searchTerm');
           if ($str != '' || $str != 'null') {
-               $data = $this->db->query("SELECT a.kodeprog AS id, CONCAT(' [ ',a.kodeprog,' ] ','-',' [ ',b.namaprog,' ] ','-',' [ ',a.namasubprog,' ] ') AS text FROM subprogram a join program b on a.kodeprog=b.kodeprog WHERE a.kodeprog = '$str' and (a.kodeprog LIKE '%" . $key . "%' OR b.namaprog LIKE '%" . $key . "%' OR a.namasubprog LIKE '%" . $key . "%') ORDER BY namaprog ASC")->result();
+               $data = $this->db->query("SELECT a.id AS id, CONCAT(' [ ',a.kodeprog,' ] ','-',' [ ',b.namaprog,' ] ','-',' [ ',a.namasubprog,' ] ') AS text FROM subprogram a join program b on a.kodeprog=b.kodeprog WHERE a.kodeprog = '$str' and (a.kodeprog LIKE '%" . $key . "%' OR b.namaprog LIKE '%" . $key . "%' OR a.namasubprog LIKE '%" . $key . "%') ORDER BY namaprog ASC")->result();
           } else {
                $data = $this->db->query("SELECT a.kodeprog AS id, CONCAT('-- PILIH PROGRAM TERLEBIH DAHULU --') AS text FROM subprogram a join program b on a.kodeprog=b.kodeprog WHERE a.kodeprog = '' and (a.kodeprog LIKE '%" . $key . "%' OR b.namaprog LIKE '%" . $key . "%' OR a.namasubprog LIKE '%" . $key . "%') ORDER BY namaprog ASC Limit 1")->result();
           }

@@ -33,33 +33,42 @@ class Perencanaan extends CI_Controller
      }
      public function save_header()
      {
+          $i_pen = $this->input->post('standar_pendidikan');
+          $sql_pen = $this->db->get_where('pendidikan', ['kodepen' => $i_pen])->row_array();
+          $i_keg = $this->input->post('kegiatan');
+          $sql_keg = $this->db->get_where('kegiatan', ['kodekeg' => $i_keg])->row_array();
+          $i_prog = $this->input->post('program');
+          $sql_prog = $this->db->get_where('program', ['kodeprog' => $i_prog])->row_array();
+          $i_subkeg = $this->input->post('subkegiatan');
+          $sql_subkeg = $this->db->get_where('subkegiatan', ['id' => $i_subkeg])->row_array();
+          $i_subprog = $this->input->post('subprogram');
+          $sql_subprog = $this->db->get_where('subprogram', ['id' => $i_subprog])->row_array();
           $data = array(
-               'standar_pendidikan' => $this->input->post('standar_pendidikan'),
-               'nama_kegiatan' => $this->input->post('nama_kegiatan'),
-               'program' => $this->input->post('program'),
-               'sub_program' => $this->input->post('sub_program'),
+               'kodeper' => $this->M_invoice->kodeper(),
+               'standar_pendidikan' => $sql_pen['namapen'],
+               'kegiatan' => $sql_keg['namakeg'],
+               'subkegiatan' => $sql_subkeg['namasubkeg'],
+               'program' => $sql_prog['namaprog'],
+               'subprogram' => $sql_subprog['namasubprog'],
                'triwulan' => $this->input->post('triwulan'),
                'subtotal' => $this->input->get('subtotal'),
                'total' => $this->input->get('total'),
+               'tanggal' => date('Y-m-d', time()),
           );
 
-          // $this->M_perencanaan->save($data);
-          // echo json_encode(['status' => 1]);
-          echo json_encode($data);
+          $this->db->insert('perencanaan', $data);
+          echo json_encode(['status' => 1]);
+          // echo json_encode($data);
      }
      public function save_detail()
      {
-          $get_id = $this->db->query("SELECT id FROM perencanaan order by id desc limit 1")->result();
-          foreach ($get_id as $gi) {
-               $id_perencanaan = $gi->id;
-          }
           $namabarang = $this->input->get('namabarang');
           $satuan = $this->input->get('satuan');
           $qty = $this->input->get('qty');
           $harga = $this->input->get('harga');
           $jumlah = $this->input->get('jumlah');
           $data = [
-               'id_perencanaan' => $id_perencanaan,
+               'kodeper' => $this->M_invoice->kodeper(),
                'namabarang' => $namabarang,
                'satuan' => $satuan,
                'qty' => $qty,
@@ -67,5 +76,6 @@ class Perencanaan extends CI_Controller
                'jumlah' => $jumlah,
           ];
           $this->db->insert('perencanaan_uraian', $data);
+          // echo json_encode($data);
      }
 }

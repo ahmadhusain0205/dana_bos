@@ -268,9 +268,10 @@
 <script>
      function save() {
           var standar_pendidikan = document.getElementById('standar_pendidikan').value;
-          var nama_kegiatan = document.getElementById('nama_kegiatan').value;
+          var nama_kegiatan = document.getElementById('kegiatan').value;
+          var subkegiatan = document.getElementById('subkegiatan').value;
           var program = document.getElementById('program').value;
-          var sub_program = document.getElementById('sub_program').value;
+          var subprogram = document.getElementById('subprogram').value;
           var triwulan = document.getElementById('triwulan').value;
           var sub_totalx = document.getElementById('sub_total').value;
           var sub_total = Number(parseInt(sub_totalx.replaceAll(',', '')));
@@ -280,40 +281,47 @@
           if (standar_pendidikan == '') {
                Swal.fire({
                     icon: 'danger',
-                    title: 'Standar Pendidikan',
+                    title: 'STANDAR PENDIDIKAN',
                     text: 'Tidak boleh kosong !',
                });
           }
-          if (nama_kegiatan == '') {
+          if (kegiatan == '') {
                Swal.fire({
                     icon: 'danger',
-                    title: 'Nama Kegiatan',
+                    title: 'NAMA KEGIATAN',
+                    text: 'Tidak boleh kosong !',
+               });
+          }
+          if (subkegiatan == '') {
+               Swal.fire({
+                    icon: 'danger',
+                    title: 'SUB KEGIATAN',
                     text: 'Tidak boleh kosong !',
                });
           }
           if (program == '') {
                Swal.fire({
                     icon: 'danger',
-                    title: 'Program',
+                    title: 'NAMA PROGRAM',
                     text: 'Tidak boleh kosong !',
                });
           }
-          if (sub_program == '') {
+          if (subprogram == '') {
                Swal.fire({
                     icon: 'danger',
-                    title: 'Sub Program',
+                    title: 'SUB PROGRAM',
                     text: 'Tidak boleh kosong !',
                });
           }
           if (triwulan == '') {
                Swal.fire({
                     icon: 'danger',
-                    title: 'Triwulan',
+                    title: 'TRIWULAN',
                     text: 'Tidak boleh kosong !',
                });
           }
 
-          if (standar_pendidikan != '' && nama_kegiatan != '' && program != '' && sub_program != '' && triwulan != '') {
+          if (standar_pendidikan != '' && kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
 
                $.ajax({
                     url: "<?php echo base_url(); ?>Perencanaan/save_header/?subtotal=" + sub_total + '&total=' + total,
@@ -321,40 +329,43 @@
                     data: $("#form_tambah").serialize(),
                     dataType: "JSON",
                     success: function(data) {
-                         console.log(data)
-                         // var table = document.getElementById('datatable');
-                         // rowCount = table.rows.length;
-                         // arr.push(idrow);
-                         // for (i = 1; i < rowCount; i++) {
-                         //      var namabarang = $('#namabarang' + i).val();
-                         //      var satuan = $('#satuan' + i).val();
-                         //      var qtyx = $('#qty' + i).val();
-                         //      var hargax = $('#harga' + i).val();
-                         //      var jumlahx = $('#jumlah' + i).val();
-                         //      var qty = parseInt(qtyx.replaceAll(',', ''));
-                         //      var harga = parseInt(hargax.replaceAll(',', ''));
-                         //      var jumlah = parseInt(jumlahx.replaceAll(',', ''));
-                         //      $.ajax({
-                         //           url: '<?= site_url() ?>Perencanaan/save_detail/?namabarang=' + namabarang + '&satuan=' + satuan + '&qty=' + qty + '&harga=' + harga + '&jumlah=' + jumlah,
-                         //           type: 'GET',
-                         //           dataType: 'JSON',
-                         //      });
-                         // }
-                         // if (data.status == 1) {
-                         //      Swal.fire({
-                         //           icon: 'success',
-                         //           title: 'Sukses',
-                         //           text: 'Save Data Berhasil !',
-                         //      }).then((value) => {
-                         //           location.href = "<?php echo base_url() ?>Perencanaan";
-                         //      });
-                         // } else {
-                         //      Swal.fire({
-                         //           icon: 'danger',
-                         //           title: 'Gagal',
-                         //           text: 'Save Data Gagal !',
-                         //      });
-                         // }
+                         // console.log(data)
+                         var table = document.getElementById('datatable');
+                         rowCount = table.rows.length;
+                         arr.push(idrow);
+                         for (i = 1; i < rowCount; i++) {
+                              var namabarang = $('#namabarang' + i).val();
+                              var satuan = $('#satuan' + i).val();
+                              var qtyx = $('#qty' + i).val();
+                              var hargax = $('#harga' + i).val();
+                              var jumlahx = $('#jumlah' + i).val();
+                              var qty = parseInt(qtyx.replaceAll(',', ''));
+                              var harga = parseInt(hargax.replaceAll(',', ''));
+                              var jumlah = parseInt(jumlahx.replaceAll(',', ''));
+                              $.ajax({
+                                   url: '<?= site_url() ?>Perencanaan/save_detail/?namabarang=' + namabarang + '&satuan=' + satuan + '&qty=' + qty + '&harga=' + harga + '&jumlah=' + jumlah,
+                                   type: 'GET',
+                                   dataType: 'JSON',
+                                   // success: function(data) {
+                                   //      console.log(data)
+                                   // }
+                              });
+                         }
+                         if (data.status == 1) {
+                              Swal.fire({
+                                   icon: 'success',
+                                   title: 'TAMBAH DATA',
+                                   text: 'Berhasil dilakukan !',
+                              }).then((value) => {
+                                   location.href = "<?php echo base_url() ?>Perencanaan";
+                              });
+                         } else {
+                              Swal.fire({
+                                   icon: 'error',
+                                   title: 'TAMBAH DATA',
+                                   text: 'Gagal dilakukan !',
+                              });
+                         }
                     }
                });
           }
