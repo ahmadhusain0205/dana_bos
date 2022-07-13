@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
 
-class Subprogram extends CI_Controller
+class Subkegiatan extends CI_Controller
 {
      function __construct()
      {
@@ -13,19 +13,19 @@ class Subprogram extends CI_Controller
      public function index()
      {
           $data = [
-               'judul' => 'Daftar Subrogram',
+               'judul' => 'Daftar Subkegiatan',
                'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
-               'subprogram' => $this->db->query('select a.*, (select namaprog from program where kodeprog=a.kodeprog) as namaprog from subprogram a')->result(),
+               'subkegiatan' => $this->db->query('select a.*, (select namakeg from kegiatan where kodekeg=a.kodekeg) as namakeg from subkegiatan a')->result(),
           ];
-          $this->template->load('Template/Content', 'Subprogram/List', $data);
+          $this->template->load('Template/Content', 'Subkegiatan/List', $data);
      }
      public function tambah()
      {
           $data = [
-               'kodeprog' => $this->input->get('kodeprog'),
-               'namasubprog' => $this->input->get('namasubprog'),
+               'kodekeg' => $this->input->get('kodekeg'),
+               'namasubkeg' => $this->input->get('namasubkeg'),
           ];
-          $save = $this->db->insert('subprogram', $data);
+          $save = $this->db->insert('subkegiatan', $data);
           if ($save) {
                echo json_encode(['status' => 1]);
           } else {
@@ -38,10 +38,10 @@ class Subprogram extends CI_Controller
                'id' => $this->input->get('idu'),
           ];
           $data = [
-               'kodeprog' => $this->input->get('kodeprogu'),
-               'namasubprog' => $this->input->get('namasubprogu'),
+               'kodekeg' => $this->input->get('kodekegu'),
+               'namasubkeg' => $this->input->get('namasubkegu'),
           ];
-          $save = $this->db->update('subprogram', $data, $where);
+          $save = $this->db->update('subkegiatan', $data, $where);
           if ($save) {
                echo json_encode(['status' => 1]);
           } else {
@@ -52,7 +52,7 @@ class Subprogram extends CI_Controller
      {
           if ($id != '') {
                $this->db->where('id', $id);
-               $this->db->delete('subprogram');
+               $this->db->delete('subkegiatan');
                echo json_encode(['status' => 1]);
           } else {
                echo json_encode(['status' => 2]);
@@ -61,7 +61,7 @@ class Subprogram extends CI_Controller
      public function data()
      {
           $id = $this->input->get('id');
-          $data = $this->db->query("select a.*, (select namaprog from program where kodeprog=a.kodeprog) as namaprog from subprogram a where a.id = '$id'")->row_array();
+          $data = $this->db->query("select a.*, (select namakeg from kegiatan where kodekeg=a.kodekeg) as namakeg from subkegiatan a where a.id = '$id'")->row_array();
           echo json_encode($data);
      }
      public function upload()
@@ -72,7 +72,7 @@ class Subprogram extends CI_Controller
           $config['encrypt_name'] = true;
           $this->load->library('upload', $config);
           if (!$this->upload->do_upload()) {
-               redirect('Subprogram');
+               redirect('Subkegiatan');
           } else {
                $data_upload = $this->upload->data();
                $excelreader = new PHPExcel_Reader_Excel2007();
@@ -83,15 +83,15 @@ class Subprogram extends CI_Controller
                foreach ($sheet as $row) {
                     if ($numrow > 1) {
                          array_push($data, array(
-                              'kodeprog' => $row['A'],
-                              'namasubprog' => $row['B'],
+                              'kodekeg' => $row['A'],
+                              'namasubkeg' => $row['B'],
                          ));
                     }
                     $numrow++;
                }
-               $this->db->insert_batch('subprogram', $data);
+               $this->db->insert_batch('subkegiatan', $data);
                unlink(realpath('excel/' . $data_upload['file_name']));
-               redirect('Subprogram');
+               redirect('subkegiatan');
           }
      }
 }

@@ -2,7 +2,7 @@
      <div class="col">
           <div class="card shadow mb-4">
                <div class="card-body">
-                    <div class="h4">SUBPROGRAM
+                    <div class="h4">SUBKEGIATAN
                          <button class="btn btn-primary btn-sm float-right" type="button" onclick="tambah_data()">
                               <i class="fas fa-plus-circle"></i> Tambah
                          </button>
@@ -16,20 +16,20 @@
                               <thead>
                                    <tr class="text-center">
                                         <th width="1%">No</th>
-                                        <th width="20%">Kode Program</th>
-                                        <th>Nama Program</th>
-                                        <th>Nama Sub Program</th>
+                                        <th width="20%">Kode Kegiatan</th>
+                                        <th>Nama Kegiatan</th>
+                                        <th>Nama Sub Kegiatan</th>
                                         <th width="10%">Aksi</th>
                                    </tr>
                               </thead>
                               <tbody>
                                    <?php $no = 1;
-                                   foreach ($subprogram as $sp) : ?>
+                                   foreach ($subkegiatan as $sp) : ?>
                                         <tr>
                                              <td><?= $no++; ?></td>
-                                             <td><?= $sp->kodeprog; ?></td>
-                                             <td><?= $sp->namaprog; ?></td>
-                                             <td><?= $sp->namasubprog; ?></td>
+                                             <td><?= $sp->kodekeg; ?></td>
+                                             <td><?= $sp->namakeg; ?></td>
+                                             <td><?= $sp->namasubkeg; ?></td>
                                              <td class="text-center">
                                                   <button class="btn btn-sm btn-circle btn-warning" type="button" onclick="ubah(<?= $sp->id; ?>)"><i class="fa fa-edit"></i></button>
                                                   <button class="btn btn-sm btn-circle btn-danger" type="button" onclick="hapus(<?= $sp->id; ?>)"><i class="fa fa-trash"></i></button>
@@ -56,15 +56,15 @@
                <form method="POST" id="modal_tambah">
                     <div class="modal-body">
                          <div class="form-group row">
-                              <label for="kodeprog" class="col-sm-4 col-form-label">Kode Program</label>
+                              <label for="kodekeg" class="col-sm-4 col-form-label">Kode Kegiatan</label>
                               <div class="col-sm-8">
-                                   <select name="kodeprog" id="kodeprog" class="form-control select2_prog" style="width: 100%;"></select>
+                                   <select name="kodekeg" id="kodekeg" class="form-control select2_keg" style="width: 100%;"></select>
                               </div>
                          </div>
                          <div class="form-group row">
-                              <label for="namasubprog" class="col-sm-4 col-form-label">Nama Sub Program</label>
+                              <label for="namasubkeg" class="col-sm-4 col-form-label">Nama Sub Kegiatan</label>
                               <div class="col-sm-8">
-                                   <input type="text" class="form-control" id="namasubprog" name="namasubprog">
+                                   <input type="text" class="form-control" id="namasubkeg" name="namasubkeg">
                               </div>
                          </div>
                     </div>
@@ -89,22 +89,22 @@
                <form method="POST" id="modal_tambah">
                     <div class="modal-body">
                          <div class="form-group row">
-                              <label for="kodeprogu" class="col-sm-4 col-form-label">Kode Program</label>
+                              <label for="kodekegu" class="col-sm-4 col-form-label">Kode Kegiatan</label>
                               <div class="col-sm-8">
                                    <input type="hidden" id="idu" name="idu">
-                                   <input type="text" class="form-control" id="kodeprogu" name="kodeprogu" readonly>
+                                   <input type="text" class="form-control" id="kodekegu" name="kodekegu" readonly>
                               </div>
                          </div>
                          <div class="form-group row">
-                              <label for="namaprogu" class="col-sm-4 col-form-label">Nama Program</label>
+                              <label for="namakegu" class="col-sm-4 col-form-label">Nama Kegiatan</label>
                               <div class="col-sm-8">
-                                   <input type="text" class="form-control" id="namaprogu" name="namaprogu">
+                                   <input type="text" class="form-control" id="namakegu" name="namakegu">
                               </div>
                          </div>
                          <div class="form-group row">
-                              <label for="namasubprogu" class="col-sm-4 col-form-label">Nama Sub Program</label>
+                              <label for="namasubkegu" class="col-sm-4 col-form-label">Nama Sub Kegiatan</label>
                               <div class="col-sm-8">
-                                   <input type="text" class="form-control" id="namasubprogu" name="namasubprogu">
+                                   <input type="text" class="form-control" id="namasubkegu" name="namasubkegu">
                               </div>
                          </div>
                     </div>
@@ -126,7 +126,7 @@
                          <span aria-hidden="true">&times;</span>
                     </button>
                </div>
-               <form action="<?= base_url('Subprogram/upload'); ?>" enctype="multipart/form-data" method="POST">
+               <form action="<?= base_url('SubKegiatan/upload'); ?>" enctype="multipart/form-data" method="POST">
                     <div class="modal-body">
                          <div class="form-group">
                               <input type="file" name="userfile" class="form-control-user">
@@ -183,22 +183,22 @@
      function ubah(id) {
           $('#ubah_modal').modal('show');
           $.ajax({
-               url: "<?php echo base_url(); ?>Subprogram/data/?id=" + id,
+               url: "<?php echo base_url(); ?>Subkegiatan/data/?id=" + id,
                type: "GET",
                dataType: "JSON",
                success: function(data) {
                     $('#idu').val(data.id);
-                    $('#kodeprogu').val(data.kodeprog);
-                    $('#namaprogu').val(data.namaprog);
-                    $('#namasubprogu').val(data.namasubprog);
+                    $('#kodekegu').val(data.kodekeg);
+                    $('#namakegu').val(data.namakeg);
+                    $('#namasubkegu').val(data.namasubkeg);
                }
           });
      }
 
      function save() {
-          var kodeprog = $('#kodeprog').val();
-          var namasubprog = $('#namasubprog').val();
-          if (namasubprog == '') {
+          var kodekeg = $('#kodekeg').val();
+          var namasubkeg = $('#namasubkeg').val();
+          if (namasubkeg == '') {
                Swal.fire({
                     icon: 'error',
                     title: 'NAMA PROGRAM',
@@ -207,7 +207,7 @@
           }
           if (namasubprog != '') {
                $.ajax({
-                    url: "<?= site_url('Subprogram/tambah/?kodeprog=') ?>" + kodeprog + "&namasubprog=" + namasubprog,
+                    url: "<?= site_url('Subkegiatan/tambah/?kodekeg=') ?>" + kodekeg + "&namasubkeg=" + namasubkeg,
                     type: "GET",
                     dataType: "JSON",
                     success: function(data) {
@@ -218,7 +218,7 @@
                                    title: 'TAMBAH DATA',
                                    text: 'Berhasil dilakukan !',
                               }).then((value) => {
-                                   location.href = "<?php echo base_url() ?>Subprogram";
+                                   location.href = "<?php echo base_url() ?>Subkegiatan";
                               });
                          } else {
                               $('#tambah_modal').modal('hide');
@@ -236,19 +236,19 @@
      }
 
      function savey() {
-          var id = $('#idu').val();
-          var kodeprog = $('#kodeprogu').val();
-          var namasubprog = $('#namasubprogu').val();
-          if (namasubprog == '') {
+          var idu = $('#idu').val();
+          var kodekeg = $('#kodekeg').val();
+          var namasubkeg = $('#namasubkeg').val();
+          if (namasubkeg == '') {
                Swal.fire({
                     icon: 'error',
-                    title: 'NAMA SUB PROGRAM',
+                    title: 'NAMA SUB KEGIATAN',
                     text: 'Tidak boleh kosong !',
                });
           }
-          if (namasubprog != '') {
+          if (namasubkeg != '') {
                $.ajax({
-                    url: "<?= site_url('Subprogram/ubah/?idu=') ?>" + id + "&kodeprogu=" + kodeprog + "&namasubprogu=" + namasubprog,
+                    url: "<?= site_url('Subkegiatan/ubah/?id=') ?>" + id + "&kodekegu=" + kodekeg + "&namasubkegu=" + namasubkeg,
                     type: "GET",
                     dataType: "JSON",
                     success: function(data) {
@@ -256,16 +256,16 @@
                               $('#ubah_modal').modal('hide');
                               Swal.fire({
                                    icon: 'success',
-                                   title: 'UBAH DATA',
+                                   title: 'TAMBAH DATA',
                                    text: 'Berhasil dilakukan !',
                               }).then((value) => {
-                                   location.href = "<?php echo base_url() ?>Subprogram";
+                                   location.href = "<?php echo base_url() ?>Subkegiatan";
                               });
                          } else {
                               $('#ubah_modal').modal('hide');
                               Swal.fire({
                                    icon: 'error',
-                                   title: 'UBAH DATA',
+                                   title: 'TAMBAH DATA',
                                    text: 'Gagal dilakukan !',
                               }).then((value) => {
                                    $('#ubah_modal').modal('show');
@@ -278,14 +278,14 @@
 
      function hapus(id) {
           $.ajax({
-               url: "<?= site_url('Subprogram/data/?id=') ?>" + id,
+               url: "<?= site_url('Subkegiatan/data/?id=') ?>" + id,
                type: "GET",
                dataType: "JSON",
                success: function(data) {
-                    var namaprog = data.namaprog;
+                    var namakeg = data.namakeg;
                     Swal.fire({
                          title: 'HAPUS DATA',
-                         text: "Yakin ingin menghapus " + namaprog + " ?",
+                         text: "Yakin ingin menghapus " + namakeg + " ?",
                          icon: 'warning',
                          showCancelButton: true,
                          confirmButtonColor: '#3085d6',
@@ -295,7 +295,7 @@
                     }).then((result) => {
                          if (result.isConfirmed) {
                               $.ajax({
-                                   url: "<?= site_url('Subprogram/hapus/') ?>" + id,
+                                   url: "<?= site_url('Subkegiatan/hapus/') ?>" + id,
                                    type: "GET",
                                    dataType: "JSON",
                                    success: function(data) {
@@ -305,7 +305,7 @@
                                                   title: 'HAPUS DATA',
                                                   html: 'Berhasil dilakukan',
                                              }).then((value) => {
-                                                  location.href = "<?php echo base_url() ?>Subprogram";
+                                                  location.href = "<?php echo base_url() ?>Subkegiatan";
                                              });
                                         } else {
                                              Swal.fire(
