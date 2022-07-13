@@ -32,7 +32,7 @@ class Globali extends CI_Controller
      public function datapendidikan()
      {
           $key = $this->input->post('searchTerm');
-          $data = $this->db->query("SELECT kodepen AS id, CONCAT(' [ ',namapen,' ] ') AS text FROM pendidikan WHERE id LIKE '%" . $key . "%' OR kodepen LIKE '%" . $key . "%' OR namapen LIKE '%" . $key . "%' ORDER BY namapen ASC")->result();
+          $data = $this->db->query("SELECT kodepen AS id, CONCAT(' [ ',kodepen,' ] ','-',' [ ',namapen,' ] ') AS text FROM pendidikan WHERE id LIKE '%" . $key . "%' OR kodepen LIKE '%" . $key . "%' OR namapen LIKE '%" . $key . "%' ORDER BY kodepen ASC")->result();
           echo json_encode($data);
      }
 }

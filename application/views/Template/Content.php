@@ -107,7 +107,7 @@
                               </div>
                          </li>
                     <?php endif; ?>
-                    <?php if ($this->uri->segment(1) == 'pendidikan') : ?>
+                    <?php if ($this->uri->segment(1) == 'Pendidikan') : ?>
                          <li class="nav-item active">
                               <a class="nav-link" href="<?= site_url('Pendidikan'); ?>">
                                    <i class="fas fa-fw fa-graduation-cap"></i>

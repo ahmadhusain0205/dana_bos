@@ -39,11 +39,13 @@
 
 <script>
      $(window).on("load", function() {
+          $('.select2_subprog').attr('disabled', true);
           initailizeSelect2_subprog(null);
      });
 
      function showsubprog() {
           var prog = $("#program").val();
           initailizeSelect2_subprog(prog);
+          $('.select2_subprog').attr('disabled', false);
      }
 </script>
