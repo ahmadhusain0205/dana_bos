@@ -348,8 +348,41 @@
                });
           }
 
+          initailizeSelect2_keg();
           initailizeSelect2_prog();
           initailizeSelect2_pen();
+
+          function initailizeSelect2_keg() {
+               $('.select2_keg').select2({
+                    allowClear: true,
+                    multiple: false,
+                    placeholder: '--- Pilih Kegiatan ---',
+                    dropdownAutoWidth: true,
+                    language: {
+                         inputTooShort: function() {
+                              return 'Ketikan minimal 2 huruf';
+                         }
+                    },
+                    ajax: {
+                         url: "<?php echo base_url(); ?>Globali/datakegiatan",
+                         type: "post",
+                         dataType: 'json',
+                         delay: 250,
+                         data: function(params) {
+                              return {
+                                   searchTerm: params.term
+                              };
+                         },
+
+                         processResults: function(response) {
+                              return {
+                                   results: response
+                              };
+                         },
+                         cache: true
+                    }
+               });
+          }
 
           function initailizeSelect2_subprog(str) {
                $('.select2_subprog').select2({

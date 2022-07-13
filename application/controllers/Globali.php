@@ -8,6 +8,17 @@ class Globali extends CI_Controller
      {
           parent::__construct();
      }
+     public function datakegiatan()
+     {
+          $key = $this->input->post('searchTerm');
+          if ($key == "") {
+               $limm = "LIMIT 10";
+          } else {
+               $limm = "";
+          }
+          $data = $this->db->query("SELECT kodekeg AS id, CONCAT(' [ ',kodekeg,' ] ','-',' [ ',namakeg,' ] ') AS text FROM kegiatan WHERE id LIKE '%" . $key . "%' OR kodekeg LIKE '%" . $key . "%' OR namakeg LIKE '%" . $key . "%' ORDER BY kodekeg ASC $limm")->result();
+          echo json_encode($data);
+     }
      public function dataprogram()
      {
           $key = $this->input->post('searchTerm');

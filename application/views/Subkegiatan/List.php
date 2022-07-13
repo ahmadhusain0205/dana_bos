@@ -6,13 +6,13 @@
                          <button class="btn btn-primary btn-sm float-right" type="button" onclick="tambah_data()">
                               <i class="fas fa-plus-circle"></i> Tambah
                          </button>
-                         <a type="button" href="#" class="btn btn-secondary btn-sm float-right my-auto mr-2" onclick="unggah_subprogram()">
+                         <a type="button" href="#" class="btn btn-secondary btn-sm float-right my-auto mr-2" onclick="unggah_subkegiatan()">
                               <i class="fas fa-upload"></i> Unggah
                          </a>
                     </div>
                     <hr>
                     <div class="table-responsive">
-                         <table class="table table-striped table-bordered table-hover" id="table-perencanaan">
+                         <table class="table table-striped table-bordered table-hover" id="table-subkegiatan">
                               <thead>
                                    <tr class="text-center">
                                         <th width="1%">No</th>
@@ -98,7 +98,7 @@
                          <div class="form-group row">
                               <label for="namakegu" class="col-sm-4 col-form-label">Nama Kegiatan</label>
                               <div class="col-sm-8">
-                                   <input type="text" class="form-control" id="namakegu" name="namakegu">
+                                   <input type="text" class="form-control" id="namakegu" name="namakegu" readonly>
                               </div>
                          </div>
                          <div class="form-group row">
@@ -142,11 +142,11 @@
 </div>
 
 <script>
-     function unggah_subprogram() {
+     function unggah_subkegiatan() {
           $('#unggah').modal('show');
      }
      $(document).ready(function() {
-          var table = $('#table-perencanaan').DataTable({
+          var table = $('#table-subkegiatan').DataTable({
                "columnDefs": [{
                     "targets": [-1],
                     "orderable": false,
@@ -201,11 +201,11 @@
           if (namasubkeg == '') {
                Swal.fire({
                     icon: 'error',
-                    title: 'NAMA PROGRAM',
+                    title: 'NAMA SUB KEGIATAN',
                     text: 'Tidak boleh kosong !',
                });
           }
-          if (namasubprog != '') {
+          if (namasubkeg != '') {
                $.ajax({
                     url: "<?= site_url('Subkegiatan/tambah/?kodekeg=') ?>" + kodekeg + "&namasubkeg=" + namasubkeg,
                     type: "GET",
@@ -236,9 +236,9 @@
      }
 
      function savey() {
-          var idu = $('#idu').val();
-          var kodekeg = $('#kodekeg').val();
-          var namasubkeg = $('#namasubkeg').val();
+          var id = $('#idu').val();
+          var kodekeg = $('#kodekegu').val();
+          var namasubkeg = $('#namasubkegu').val();
           if (namasubkeg == '') {
                Swal.fire({
                     icon: 'error',
@@ -248,7 +248,7 @@
           }
           if (namasubkeg != '') {
                $.ajax({
-                    url: "<?= site_url('Subkegiatan/ubah/?id=') ?>" + id + "&kodekegu=" + kodekeg + "&namasubkegu=" + namasubkeg,
+                    url: "<?= site_url('Subkegiatan/ubah/?idu=') ?>" + id + "&kodekegu=" + kodekeg + "&namasubkegu=" + namasubkeg,
                     type: "GET",
                     dataType: "JSON",
                     success: function(data) {
@@ -256,7 +256,7 @@
                               $('#ubah_modal').modal('hide');
                               Swal.fire({
                                    icon: 'success',
-                                   title: 'TAMBAH DATA',
+                                   title: 'UBAH DATA',
                                    text: 'Berhasil dilakukan !',
                               }).then((value) => {
                                    location.href = "<?php echo base_url() ?>Subkegiatan";
@@ -265,7 +265,7 @@
                               $('#ubah_modal').modal('hide');
                               Swal.fire({
                                    icon: 'error',
-                                   title: 'TAMBAH DATA',
+                                   title: 'UBAH DATA',
                                    text: 'Gagal dilakukan !',
                               }).then((value) => {
                                    $('#ubah_modal').modal('show');
@@ -282,10 +282,10 @@
                type: "GET",
                dataType: "JSON",
                success: function(data) {
-                    var namakeg = data.namakeg;
+                    var namasubkeg = data.namasubkeg;
                     Swal.fire({
                          title: 'HAPUS DATA',
-                         text: "Yakin ingin menghapus " + namakeg + " ?",
+                         text: "Yakin ingin menghapus " + namasubkeg + " ?",
                          icon: 'warning',
                          showCancelButton: true,
                          confirmButtonColor: '#3085d6',
