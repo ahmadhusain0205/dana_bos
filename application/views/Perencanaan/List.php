@@ -21,7 +21,7 @@
                                         <!-- <th>Sub Program</th> -->
                                         <th>Triwulan</th>
                                         <th width="13%">Total</th>
-                                        <th width="10%">Aksi</th>
+                                        <th width="8%">Aksi</th>
                                    </tr>
                               </thead>
                               <tbody>
@@ -38,9 +38,8 @@
                                              <td class="text-right"><?= number_format($p->triwulan); ?></td>
                                              <td>Rp. <span class="float-right"><?= number_format($p->total); ?></span></td>
                                              <td class="text-center">
-                                                  <button type="button" class="btn btn-sm btn-circle btn-info" onclick="info()"><i class="fas fa-info"></i></button>
-                                                  <button type="button" class="btn btn-sm btn-circle btn-warning" onclick="edit()"><i class="fas fa-edit"></i></button>
-                                                  <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="hapus()"><i class="fas fa-trash"></i></button>
+                                                  <a href="<?= site_url('Perencanaan/edit/') . $p->kodeper ?>" type="button" class="btn btn-sm btn-circle btn-warning"><i class="fas fa-edit"></i></a>
+                                                  <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="hapus(<?= $p->id; ?>)"><i class="fas fa-trash"></i></button>
                                              </td>
                                         </tr>
                                    <?php endforeach; ?>
@@ -81,4 +80,52 @@
                "responsive": true,
           });
      });
+</script>
+
+<script>
+     function hapus(id) {
+          $.ajax({
+               url: "<?= site_url('Perencanaan/data/?id=') ?>" + id,
+               type: "GET",
+               dataType: "JSON",
+               success: function(data) {
+                    var kodeper = data.kodeper;
+                    Swal.fire({
+                         title: 'HAPUS DATA',
+                         text: "Yakin ingin menghapus " + kodeper + " ?",
+                         icon: 'warning',
+                         showCancelButton: true,
+                         confirmButtonColor: '#3085d6',
+                         cancelButtonColor: '#d33',
+                         confirmButtonText: 'Hapus',
+                         CancelButtonText: 'Tidak'
+                    }).then((result) => {
+                         if (result.isConfirmed) {
+                              $.ajax({
+                                   url: "<?= site_url('Perencanaan/hapus/') ?>" + id,
+                                   type: "GET",
+                                   dataType: "JSON",
+                                   success: function(data) {
+                                        if (data.status == 1) {
+                                             Swal.fire({
+                                                  icon: 'success',
+                                                  title: 'HAPUS DATA',
+                                                  html: 'Berhasil dilakukan',
+                                             }).then((value) => {
+                                                  location.href = "<?php echo base_url() ?>Perencanaan";
+                                             });
+                                        } else {
+                                             Swal.fire(
+                                                  'HAPUS DATA',
+                                                  'Gagal dilakukan !',
+                                                  'error'
+                                             );
+                                        }
+                                   }
+                              });
+                         }
+                    });
+               }
+          });
+     }
 </script>
