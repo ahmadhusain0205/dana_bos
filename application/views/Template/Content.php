@@ -137,19 +137,19 @@
                          </li>
                     <?php endif; ?>
                     <?php if ($this->uri->segment(1) == 'Pendidikan') : ?>
-                         <li class="nav-item active">
+                         <!-- <li class="nav-item active">
                               <a class="nav-link" href="<?= site_url('Pendidikan'); ?>">
                                    <i class="fas fa-fw fa-graduation-cap"></i>
                                    <span>Pendidikan</span>
                               </a>
-                         </li>
+                         </li> -->
                     <?php else : ?>
-                         <li class="nav-item">
+                         <!-- <li class="nav-item">
                               <a class="nav-link" href="<?= site_url('Pendidikan'); ?>">
                                    <i class="fas fa-fw fa-graduation-cap"></i>
                                    <span>Pendidikan</span>
                               </a>
-                         </li>
+                         </li> -->
                     <?php endif; ?>
                     <hr class="sidebar-divider my-0">
                     <?php if ($this->uri->segment(1) == 'Beranda') : ?>
