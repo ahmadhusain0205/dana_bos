@@ -14,7 +14,7 @@
                                    <tr class="text-center">
                                         <th width="1%">No</th>
                                         <th>Tanggal</th>
-                                        <th>Standar Pendidikan</th>
+                                        <!-- <th>Standar Pendidikan</th> -->
                                         <th>Kegiatan</th>
                                         <!-- <th>Sub Kegiatan</th> -->
                                         <th>Program</th>
@@ -30,7 +30,7 @@
                                         <tr>
                                              <td><?= $no++; ?></td>
                                              <td><?= date('d-m-Y', strtotime($p->tanggal)); ?></td>
-                                             <td><?= $p->standar_pendidikan; ?></td>
+                                             <!-- <td><?= $p->standar_pendidikan; ?></td> -->
                                              <td><?= $p->kegiatan; ?></td>
                                              <!-- <td><?= $p->subkegiatan; ?></td> -->
                                              <td><?= $p->program; ?></td>

@@ -12,7 +12,7 @@
                          <input type="hidden" name="kodeper" id="kodeper" value="<?= $invoice ?>">
                          <div class="row">
                               <div class="col">
-                                   <div class="form-group row">
+                                   <!-- <div class="form-group row">
                                         <label for="standar_pendidikan" class="col-sm-2 col-form-label">Standar Pendidikan</label>
                                         <div class="col-sm-5">
                                              <select name="standar_pendidikan" id="standar_pendidikan" class="form-control select2_pen">
@@ -24,7 +24,7 @@
                                                   <?php } ?>
                                              </select>
                                         </div>
-                                   </div>
+                                   </div> -->
                                    <div class="form-group row">
                                         <label for="kegiatan" class="col-sm-2 col-form-label">Kegiatan</label>
                                         <div class="col-sm-5">
@@ -312,7 +312,7 @@
 <script>
      function update() {
           var kodeper = $('#kodeper').val();
-          var standar_pendidikan = $('#standar_pendidikan').val();
+          // var standar_pendidikan = $('#standar_pendidikan').val();
           var nama_kegiatan = document.getElementById('kegiatan').value;
           var subkegiatan = document.getElementById('subkegiatan').value;
           var program = document.getElementById('program').value;
@@ -322,13 +322,13 @@
           var sub_total = Number(parseInt(sub_totalx.replaceAll(',', '')));
           var totalx = document.getElementById('total').value;
           var total = Number(parseInt(totalx.replaceAll(',', '')));
-          if (standar_pendidikan == '') {
-               Swal.fire({
-                    icon: 'danger',
-                    title: 'STANDAR PENDIDIKAN',
-                    text: 'Tidak boleh kosong !',
-               });
-          }
+          // if (standar_pendidikan == '') {
+          //      Swal.fire({
+          //           icon: 'danger',
+          //           title: 'STANDAR PENDIDIKAN',
+          //           text: 'Tidak boleh kosong !',
+          //      });
+          // }
           if (kegiatan == '') {
                Swal.fire({
                     icon: 'danger',
@@ -364,7 +364,8 @@
                     text: 'Tidak boleh kosong !',
                });
           }
-          if (standar_pendidikan != '' && kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
+          // if (standar_pendidikan != '' && kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
+          if (kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
                $.ajax({
                     url: "<?= site_url('Perencanaan/update_header?subtotal=') ?>" + sub_total + '&total=' + total + '&kodeper=' + kodeper,
                     type: "POST",

@@ -33,8 +33,8 @@ class Perencanaan extends CI_Controller
      }
      public function save_header()
      {
-          $i_pen = $this->input->post('standar_pendidikan');
-          $sql_pen = $this->db->get_where('pendidikan', ['kodepen' => $i_pen])->row_array();
+          // $i_pen = $this->input->post('standar_pendidikan');
+          // $sql_pen = $this->db->get_where('pendidikan', ['kodepen' => $i_pen])->row_array();
           $i_keg = $this->input->post('kegiatan');
           $sql_keg = $this->db->get_where('kegiatan', ['kodekeg' => $i_keg])->row_array();
           $i_prog = $this->input->post('program');
@@ -43,9 +43,10 @@ class Perencanaan extends CI_Controller
           $sql_subkeg = $this->db->get_where('subkegiatan', ['id' => $i_subkeg])->row_array();
           $i_subprog = $this->input->post('subprogram');
           $sql_subprog = $this->db->get_where('subprogram', ['id' => $i_subprog])->row_array();
+          $kodeper = $this->M_invoice->kodeper();
           $data = array(
-               'kodeper' => $this->M_invoice->kodeper(),
-               'standar_pendidikan' => $sql_pen['namapen'],
+               'kodeper' => $kodeper,
+               // 'standar_pendidikan' => $sql_pen['namapen'],
                'kegiatan' => $sql_keg['namakeg'],
                'subkegiatan' => $sql_subkeg['namasubkeg'],
                'program' => $sql_prog['namaprog'],
@@ -57,7 +58,7 @@ class Perencanaan extends CI_Controller
           );
 
           $this->db->insert('perencanaan', $data);
-          echo json_encode(['status' => 1]);
+          echo json_encode(['status' => 1, 'kodeper' => $kodeper]);
           // echo json_encode($data);
      }
      public function save_detail()
@@ -68,7 +69,7 @@ class Perencanaan extends CI_Controller
           $harga = $this->input->get('harga');
           $jumlah = $this->input->get('jumlah');
           $data = [
-               'kodeper' => $this->M_invoice->kodeper(),
+               'kodeper' => $this->input->get('kodeper'),
                'namabarang' => $namabarang,
                'satuan' => $satuan,
                'qty' => $qty,
@@ -113,8 +114,8 @@ class Perencanaan extends CI_Controller
      }
      public function update_header()
      {
-          $i_pen = $this->input->post('standar_pendidikan');
-          $sql_pen = $this->db->get_where('pendidikan', ['kodepen' => $i_pen])->row_array();
+          // $i_pen = $this->input->post('standar_pendidikan');
+          // $sql_pen = $this->db->get_where('pendidikan', ['kodepen' => $i_pen])->row_array();
           $i_keg = $this->input->post('kegiatan');
           $sql_keg = $this->db->get_where('kegiatan', ['kodekeg' => $i_keg])->row_array();
           $i_prog = $this->input->post('program');
@@ -125,7 +126,7 @@ class Perencanaan extends CI_Controller
           $sql_subprog = $this->db->get_where('subprogram', ['id' => $i_subprog])->row_array();
           $data = array(
                'kodeper' => $this->input->get('kodeper'),
-               'standar_pendidikan' => $sql_pen['namapen'],
+               // 'standar_pendidikan' => $sql_pen['namapen'],
                'kegiatan' => $sql_keg['namakeg'],
                'subkegiatan' => $sql_subkeg['namasubkeg'],
                'program' => $sql_prog['namaprog'],

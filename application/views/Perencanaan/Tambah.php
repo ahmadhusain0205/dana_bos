@@ -11,12 +11,12 @@
                     <form method="POST" id="form_tambah">
                          <div class="row">
                               <div class="col">
-                                   <div class="form-group row">
+                                   <!-- <div class="form-group row">
                                         <label for="standar_pendidikan" class="col-sm-2 col-form-label">Standar Pendidikan</label>
                                         <div class="col-sm-5">
                                              <select name="standar_pendidikan" id="standar_pendidikan" class="form-control select2_pen"></select>
                                         </div>
-                                   </div>
+                                   </div> -->
                                    <div class="form-group row">
                                         <label for="kegiatan" class="col-sm-2 col-form-label">Kegiatan</label>
                                         <div class="col-sm-5">
@@ -267,7 +267,7 @@
 <!-- simpan -->
 <script>
      function save() {
-          var standar_pendidikan = document.getElementById('standar_pendidikan').value;
+          // var standar_pendidikan = document.getElementById('standar_pendidikan').value;
           var nama_kegiatan = document.getElementById('kegiatan').value;
           var subkegiatan = document.getElementById('subkegiatan').value;
           var program = document.getElementById('program').value;
@@ -278,13 +278,13 @@
           var totalx = document.getElementById('total').value;
           var total = Number(parseInt(totalx.replaceAll(',', '')));
 
-          if (standar_pendidikan == '') {
-               Swal.fire({
-                    icon: 'danger',
-                    title: 'STANDAR PENDIDIKAN',
-                    text: 'Tidak boleh kosong !',
-               });
-          }
+          // if (standar_pendidikan == '') {
+          //      Swal.fire({
+          //           icon: 'danger',
+          //           title: 'STANDAR PENDIDIKAN',
+          //           text: 'Tidak boleh kosong !',
+          //      });
+          // }
           if (kegiatan == '') {
                Swal.fire({
                     icon: 'danger',
@@ -321,7 +321,8 @@
                });
           }
 
-          if (standar_pendidikan != '' && kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
+          // if (standar_pendidikan != '' && kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
+          if (kegiatan != '' && subkegiatan != '' && program != '' && subprogram != '' && triwulan != '') {
 
                $.ajax({
                     url: "<?php echo base_url(); ?>Perencanaan/save_header/?subtotal=" + sub_total + '&total=' + total,
@@ -329,6 +330,7 @@
                     data: $("#form_tambah").serialize(),
                     dataType: "JSON",
                     success: function(data) {
+                         var kodeper = data.kodeper;
                          // console.log(data)
                          var table = document.getElementById('datatable');
                          rowCount = table.rows.length;
@@ -343,7 +345,7 @@
                               var harga = parseInt(hargax.replaceAll(',', ''));
                               var jumlah = parseInt(jumlahx.replaceAll(',', ''));
                               $.ajax({
-                                   url: '<?= site_url() ?>Perencanaan/save_detail/?namabarang=' + namabarang + '&satuan=' + satuan + '&qty=' + qty + '&harga=' + harga + '&jumlah=' + jumlah,
+                                   url: '<?= site_url() ?>Perencanaan/save_detail/?namabarang=' + namabarang + '&satuan=' + satuan + '&qty=' + qty + '&harga=' + harga + '&jumlah=' + jumlah + '&kodeper=' + kodeper,
                                    type: 'GET',
                                    dataType: 'JSON',
                                    // success: function(data) {

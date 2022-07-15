@@ -7,7 +7,7 @@ class M_invoice extends CI_Model
           $query = $this->db->query($sql);
           if ($query->num_rows() > 0) {
                $row = $query->row();
-               $n = (substr($row->kodeper, 1)) + 1;
+               $n = (substr($row->kodeper, 2)) + 1;
                $no = sprintf("%'.06d", $n);
           } else {
                $no = "000001";

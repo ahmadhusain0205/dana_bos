@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 06:20 PM
+-- Generation Time: Jul 15, 2022 at 05:54 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -209,7 +209,7 @@ INSERT INTO `pendidikan` (`id`, `kodepen`, `namapen`) VALUES
 CREATE TABLE `perencanaan` (
   `id` int(11) NOT NULL,
   `kodeper` varchar(200) NOT NULL,
-  `standar_pendidikan` text NOT NULL,
+  `standar_pendidikan` text,
   `kegiatan` text NOT NULL,
   `subkegiatan` text NOT NULL,
   `program` text NOT NULL,
@@ -225,7 +225,9 @@ CREATE TABLE `perencanaan` (
 --
 
 INSERT INTO `perencanaan` (`id`, `kodeper`, `standar_pendidikan`, `kegiatan`, `subkegiatan`, `program`, `subprogram`, `triwulan`, `subtotal`, `total`, `tanggal`) VALUES
-(11, 'PR000001', 'Standar Isi', 'Penyusunan Soal Penilaian', 'Penyusunan soal Penilaian Harian (PH)', 'Pengembangan Standar Proses', 'Pelaksanaan Kegiatan Pembelajaran dan Ekstrakurikuler', 1, 300000, 300000, '2022-07-13');
+(11, 'PR000001', 'Standar Isi', 'Penyusunan Soal Penilaian', 'Penyusunan soal Penilaian Harian (PH)', 'Pengembangan Standar Proses', 'Pelaksanaan Kegiatan Pembelajaran dan Ekstrakurikuler', 1, 300000, 300000, '2022-07-13'),
+(14, 'PR000003', NULL, 'Penyusunan Kisi-Kisi Penilaian', 'Penyusunan kisi-kisi Penilaian Harian (PH)', 'Pengembangan Standar Proses', 'Pelaksanaan Kegiatan Pembelajaran dan Ekstrakurikuler', 3, 4500000, 4500000, '2022-07-15'),
+(15, 'PR000004', NULL, 'Penyusunan Kisi-Kisi Penilaian', 'Penyusunan kisi-kisi Penilaian Harian (PH)', 'Pengembangan dan implementasi sistem penilaian', 'Pelaksanaan Kegiatan Asesmen/Evaluasi Pembelajaran', 1, 10000000, 10000000, '2022-07-15');
 
 -- --------------------------------------------------------
 
@@ -249,7 +251,10 @@ CREATE TABLE `perencanaan_uraian` (
 
 INSERT INTO `perencanaan_uraian` (`id`, `kodeper`, `namabarang`, `satuan`, `qty`, `harga`, `jumlah`) VALUES
 (20, 'PR000001', 'Pot 02 Polos Natamas ( 1 R )', 'pack', 10, 20000, 200000),
-(21, 'PR000001', 'Cleansing Normal ( N )', 'dus', 10, 10000, 100000);
+(21, 'PR000001', 'Cleansing Normal ( N )', 'dus', 10, 10000, 100000),
+(22, 'PR000003', 'Cleansing Normal ( N )', 'dus', 10, 150000, 1500000),
+(23, 'PR000003', 'lemari', 'dus', 10, 300000, 3000000),
+(24, 'PR000004', 'tes', 'dus', 100, 100000, 10000000);
 
 -- --------------------------------------------------------
 
@@ -365,7 +370,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `nama`, `alamat`, `no_hp`, `tempat_lahir`, `tgl_lahir`, `gambar`, `jkel`, `pembuatan`, `on_off`, `id_role`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'administrator', 'Muntilan', '123', 'Muntilan', '1997-06-01', 'default.png', 'P', 0, 1, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'administrator', 'Muntilan', '123', 'Muntilan', '1997-06-01', 'default.png', 'P', 0, 0, 1),
 (2, 'ahmadhusain_98', '7f2df52bbcbb5ebff041ff46506800a9', 'Ahmad Husain', 'Mungkid', '00000', 'Jakarta', '1998-05-02', 'default.png', 'L', 2022, 0, 2);
 
 --
@@ -434,7 +439,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2680;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1475;
 
 --
 -- AUTO_INCREMENT for table `pendidikan`
@@ -446,19 +451,19 @@ ALTER TABLE `pendidikan`
 -- AUTO_INCREMENT for table `perencanaan`
 --
 ALTER TABLE `perencanaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `perencanaan_uraian`
 --
 ALTER TABLE `perencanaan_uraian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1482;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -470,13 +475,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `subkegiatan`
 --
 ALTER TABLE `subkegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1347;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subprogram`
 --
 ALTER TABLE `subprogram`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1361;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
